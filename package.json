@@ -10,7 +10,9 @@
   "author": "Onesinus SPT",
   "license": "ISC",
   "dependencies": {
-    "fastify": "^3.19.1"
+    "fastify": "^3.19.1",
+    "fastify-plugin": "^3.0.0",
+    "mysql": "^2.18.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.12"

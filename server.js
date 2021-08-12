@@ -1,10 +1,14 @@
-const fastify = require('fastify')({ logger: true })
+const log = require('pino')({ level: 'info' })
 
-const pluginPertama = require('./plugin-pertama')
-const endpointPertama = require('./endpoint-pertama')
+const fastify = require('fastify')({ 
+  logger: log
+})
 
-fastify.register(endpointPertama)
-fastify.register(pluginPertama)
+const { mysql } = require('./plugins')
+const { users } = require('./routes')
+
+fastify.register(mysql)
+fastify.register(users, { prefix: '/users' })
 
 const start = async () => {
   try {
