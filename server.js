@@ -6,9 +6,10 @@ const fastify = require('fastify')({
 
 const { mysql } = require('./plugins')
 const { users } = require('./routes')
+const { usersSchema  } = require('./schemas')
 
 fastify.register(mysql)
-fastify.register(users, { prefix: '/users' })
+fastify.register(users, { prefix: '/users', schema: usersSchema })
 
 const start = async () => {
   try {
