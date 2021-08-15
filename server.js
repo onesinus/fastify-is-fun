@@ -7,8 +7,10 @@ const fastify = require('fastify')({
 const { mysql } = require('./plugins')
 const { users } = require('./routes')
 const { usersSchema  } = require('./schemas')
+const bcrypt = require('fastify-bcrypt')
 
 fastify.register(mysql)
+fastify.register(bcrypt, { saltWorkFactor: 11 })
 fastify.register(users, { prefix: '/users', schema: usersSchema })
 
 const start = async () => {

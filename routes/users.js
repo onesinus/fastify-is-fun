@@ -14,10 +14,13 @@ async function users (fastify, opts) {
         })
     })
 
-    fastify.post('/', opts["schema"], (request, reply) => {
+    fastify.post('/', opts["schema"], async (request, reply) => {
         const { username, password } = request.body
         
-        const data = { username, password }
+        const data = { 
+            username, 
+            password: await fastify.bcrypt.hash(password)
+        }
         fastify.conn.query('INSERT INTO users SET ?', data, (err, res, fields) => {
             if (err) reply.send(err)
             reply.send(data)
