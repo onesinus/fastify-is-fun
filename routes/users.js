@@ -14,16 +14,23 @@ async function users (fastify, opts) {
         })
     })
 
-    fastify.post('/', opts["schema"], async (request, reply) => {
+    fastify.post('/', opts["schema"], (request, reply) => {
         const { username, password } = request.body
         
-        const data = { 
-            username, 
-            password: await fastify.bcrypt.hash(password)
-        }
-        fastify.conn.query('INSERT INTO users SET ?', data, (err, res, fields) => {
+        fastify.conn.query('SELECT * FROM users WHERE username=?', username, async (err, res, fields) => {
             if (err) reply.send(err)
-            reply.send(data)
+            if (res[0]) {
+                reply.code(400).send('Username is already exist')
+            } else {
+                const data = { 
+                    username, 
+                    password: await fastify.bcrypt.hash(password)
+                }
+                fastify.conn.query('INSERT INTO users SET ?', data, (err, res, fields) => {
+                    if (err) reply.send(err)
+                    reply.send(data)
+                })
+            }
         })
     })
 
