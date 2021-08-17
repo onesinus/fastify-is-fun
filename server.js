@@ -12,6 +12,9 @@ const bcrypt = require('fastify-bcrypt')
 fastify.register(mysql)
 fastify.register(bcrypt, { saltWorkFactor: 11 })
 
+fastify.get('/', function (request, reply) {
+  reply.send({ hello: 'world' })
+})
 fastify.register(users, { prefix: '/users', schema: usersSchema })
 fastify.register(auth, { prefix: '/auth', schema: authSchema })
 
