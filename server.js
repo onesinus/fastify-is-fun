@@ -18,9 +18,9 @@ fastify.get('/', function (request, reply) {
 fastify.register(users, { prefix: '/users', schema: usersSchema })
 fastify.register(auth, { prefix: '/auth', schema: authSchema })
 
-const start = async () => {
+const start = () => {
   try {
-    await fastify.listen(3000)
+    fastify.listen(3000)
   } catch (err) {
     fastify.log.error(err)
     process.exit(1)
