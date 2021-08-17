@@ -6,7 +6,8 @@ const app = Fastify({
     logger: true
 })
 
-app.register(import("../server"))
+const server = require('../server')
+app.register(server)
 
 export default async (req, res) => {
     await app.ready()
