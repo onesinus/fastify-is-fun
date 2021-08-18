@@ -20,7 +20,7 @@ fastify.register(auth, { prefix: '/auth', schema: authSchema })
 
 const start = () => {
   try {
-    fastify.listen()
+    fastify.listen(process.env.PORT || 3000)
   } catch (err) {
     fastify.log.error(err)
     process.exit(1)
