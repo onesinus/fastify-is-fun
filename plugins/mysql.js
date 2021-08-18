@@ -3,9 +3,9 @@ const fastifyPlugin = require('fastify-plugin')
 function MysqlConnector (fastify, options, done) {
     const  mysql = require('mysql')
     const connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: '',
+        host: 'db4free.net',
+        user: 'fastify',
+        password: 'fastifyisfun',
         database: 'fastify_restful'
     })
 
