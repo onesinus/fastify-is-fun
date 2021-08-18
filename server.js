@@ -18,13 +18,14 @@ fastify.get('/', function (request, reply) {
 fastify.register(users, { prefix: '/users', schema: usersSchema })
 fastify.register(auth, { prefix: '/auth', schema: authSchema })
 
-const start = () => {
-  try {
-    fastify.listen(process.env.PORT || 3000)
-  } catch (err) {
-    fastify.log.error(err)
-    process.exit(1)
-  }
-}
+// const start = () => {
+//   try {
+//     const PORT = process.env.PORT || 3000
+//     fastify.listen(PORT)
+//   } catch (err) {
+//     fastify.log.error(err)
+//     process.exit(1)
+//   }
+// }
 
-module.exports = start
+module.exports = fastify
