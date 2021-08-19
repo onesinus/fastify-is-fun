@@ -5,7 +5,7 @@ const fastify = require('fastify')({
 })
 
 const { mysql } = require('./plugins')
-const { users, auth } = require('./routes')
+const { users, auth, init_db } = require('./routes')
 const { usersSchema, authSchema  } = require('./schemas')
 const bcrypt = require('fastify-bcrypt')
 
@@ -15,6 +15,7 @@ fastify.register(bcrypt, { saltWorkFactor: 11 })
 fastify.get('/', function (request, reply) {
   reply.send({ hello: 'world' })
 })
+fastify.register(init_db, { prefix: '/init-db' })
 fastify.register(users, { prefix: '/users', schema: usersSchema })
 fastify.register(auth, { prefix: '/auth', schema: authSchema })
 
